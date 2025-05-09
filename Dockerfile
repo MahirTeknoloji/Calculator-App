@@ -5,12 +5,12 @@ WORKDIR /app
 
 # Önce sadece Cargo.toml'u kopyala ve sahte bir main.rs oluştur
 # Bu, bağımlılıkların önbelleklenmesini sağlar
-COPY ../../../Cargo.toml .
+COPY Cargo.toml .
 RUN mkdir -p src && echo "fn main() {}" > src/main.rs
 RUN cargo build --release
 
 # Şimdi gerçek kaynak kodunu kopyala ve derle
-COPY ../.. src
+COPY src src
 # Cargo.lock varsa onu da kopyala
 COPY Cargo.lock* .
 # Önbelleği temizle ve yeniden derle
